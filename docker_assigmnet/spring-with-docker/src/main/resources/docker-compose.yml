@@ -1,0 +1,24 @@
+version: '2'
+web:
+      build: myuser/manager:latest
+      ports: 
+          - 8080:8080
+      depends_on:
+          - db
+services:
+    db:
+        container_name: world-db
+        image: postgres:11
+        volumes:
+            - world-db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=world
+            - POSTGRES_USER=world123
+            - POSTGRES_DB=world-db
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        ports:
+            - 5432:5432
+
+volumes:
+    world-db: {}
+    
